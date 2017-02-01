@@ -7,6 +7,7 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +22,20 @@ public class servlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-           resp.setContentType("text/html");
-           PrintWriter out=resp.getWriter();
-           
-           out.println("<h1> Beer Selection Advice</h1><br>");
+//           resp.setContentType("text/html");
+//           PrintWriter out=resp.getWriter();
+//           
+//           out.println("<h1> Beer Selection Advice</h1><br>");
            String c = req.getParameter("colour");
-           out.print("<br>Got Beer Colour  <h4>"+ c+"</h4>");
+//           out.print("<br>Got Beer Colour  <h4>"+ c+"</h4>");
            
            BeerExpert be = new BeerExpert();
-           String price=be.getPrice(c);
-           out.print("<br> Beer Price  <h4>"+ price+"</h4>");
+           String Beerprice=be.getPrice(c);
+//           out.print("<br> Beer Price  <h4>"+ price+"</h4>");
+
+            req.setAttribute("price", Beerprice); //Add the attribute to the request
+            RequestDispatcher view=req.getRequestDispatcher("result.jsp"); //initialise request dispatcher
+            view.forward(req, resp); //jsp generates page to the container
            
     }
     
