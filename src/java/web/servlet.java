@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.BeerExpert;
 
 /**
  *
@@ -25,7 +26,11 @@ public class servlet extends HttpServlet{
            
            out.println("<h1> Beer Selection Advice</h1><br>");
            String c = req.getParameter("colour");
-           out.println("<br>Got Beer Colour  <h4>"+ c+"</h4>");
+           out.print("<br>Got Beer Colour  <h4>"+ c+"</h4>");
+           
+           BeerExpert be = new BeerExpert();
+           String price=be.getPrice(c);
+           out.print("<br> Beer Price  <h4>"+ price+"</h4>");
            
     }
     
